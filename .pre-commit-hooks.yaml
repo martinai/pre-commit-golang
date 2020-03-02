@@ -75,3 +75,20 @@
     files: '\.go$'
     language: 'script'
     description: "Runs `go build`, requires golang"
+# ==============================================================================
+# go-test-mod
+#   * Folder-Based
+#   * Recursive
+#   * Targets first parent folder with a go.mod file
+#   * Executes if any .go files modified
+#   * Executes if go.mod modified
+# ==============================================================================
+-   id: go-test-mod
+    name: 'go-test-mod'
+    entry: go-test-mod.sh
+    files: '(\.go$)|(\bgo\.mod$)'
+    exclude: '(^|/)vendor/'
+    language: 'script'
+    description: "Run 'cd $(mod_root $FILE); go test [$ARGS] ./...' for each staged .go file"
+    pass_filenames: true
+    require_serial: true
